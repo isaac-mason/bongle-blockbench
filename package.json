@@ -1,0 +1,14 @@
+{
+  "name": "bongle-blockbench",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Bongle's hosted Blockbench: stock Blockbench plus a plugin for exporting and validating Bongle character rigs.",
+  "scripts": {
+    "build:plugin": "esbuild plugin/src/index.js --bundle --format=iife --loader:.bbmodel=json --outfile=bongle.js",
+    "build": "./build.sh",
+    "preview": "npx --yes serve dist"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0"
+  }
+}
