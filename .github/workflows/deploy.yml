@@ -1,0 +1,45 @@
+# Build the hosted Blockbench distribution and deploy it to Cloudflare Pages.
+#
+# Runs on every merge to main (and manually). The repo root is a plain npm
+# package, and the only submodule is the public Blockbench, so the build needs
+# no special auth.
+#
+# Required repo secrets (Settings > Secrets and variables > Actions):
+#   CLOUDFLARE_API_TOKEN   - Account > Cloudflare Pages > Edit
+#   CLOUDFLARE_ACCOUNT_ID  - your Cloudflare account id
+
+name: deploy
+
+on:
+  push:
+    branches: [main]
+    # Doc-only changes do not affect the build.
+    paths-ignore: ['**.md', 'cover.png']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive # the nested blockbench submodule (public)
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Build distribution
+        run: |
+          npm ci
+          ./build.sh
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist --project-name=bongle-blockbench --branch=main
