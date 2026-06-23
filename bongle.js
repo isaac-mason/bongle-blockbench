@@ -351,20 +351,20 @@
         color: "var(--color-accent)",
         text_color: "#ffffff",
         text: [
-          { type: "h2", text: "Bongle Blockbench" },
+          { type: "h2", text: "Make a bongle avatar or model" },
           {
             type: "p",
-            text: "A for-convenience hosted build of Blockbench with the Bongle plugin pre-installed. Create a **Bongle Character** or **Bongle Model** from the New screen, then use **File > Export > Export Bongle glTF**."
+            text: "Blockbench with the bongle plugin built in, for making avatars and models for bongle games. Click **New**, pick **Bongle Character** (or **Bongle Model**), build it, then export with **File > Export > Export Bongle glTF** and upload the file on bongle.io to wear it in-game."
           },
           {
             type: "button",
-            text: "Instructions &amp; docs",
+            text: "Start here",
             click: () => openExternal("https://github.com/isaac-mason/bongle-blockbench#readme")
           },
           {
             type: "button",
-            text: "bongle-blockbench on GitHub",
-            click: () => openExternal("https://github.com/isaac-mason/bongle-blockbench")
+            text: "What is bongle?",
+            click: () => openExternal("https://bongle.io")
           },
           { type: "button", text: "bongle on GitHub", click: () => openExternal("https://github.com/isaac-mason/bongle") }
         ]
